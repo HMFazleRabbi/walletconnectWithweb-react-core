@@ -1,38 +1,131 @@
-.App {
+/* App.css */
+
+body {
+  background-color: #608bdb;
+  margin: 0;
+  padding: 0;
+}
+
+.wallet-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.card {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 400px;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.wallet-title {
+  margin-bottom: 10px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.card-content {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.bold-text {
+  font-weight: bold;
+}
+
+.wallet-connected {
+  padding-top: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-top: 15px;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  width: 100%;
+  text-align: left;
+}
+
+.chain-id,
+.connected-account {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.chain-id {
+  font-weight: bold;
+}
+
+.connect-button,
+.connect-wallet-button {
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.connect-wallet-button {
+  background-color: #007bff;
+}
+
+.connect-button:hover,
+.connect-wallet-button:hover {
+  background-color: #0056b3;
+}
+.disconnect-button-container {
+  padding-top: 30px;
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  margin-top: 15px;
 }
 
-.App-link {
-  color: #61dafb;
+.disconnect-button {
+  padding: 10px 20px;
+  background-color: #ff6b6b;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  width: 100%;
+
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.disconnect-button:hover {
+  background-color: #e74c3c;
 }
+.footer {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #555;
+  display: flex; /* Use flexbox */
+  align-items: center; /* Center vertically within the container */
+  justify-content: center; /* Center horizontally within the container */
+}
+
+
+.connect-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.connect-button.disabled {
+  background-color: #ccc; /* Gray color for disabled button */
+  color: #999; /* Lighter gray text color */
+  cursor: not-allowed; /* Show "not allowed" cursor */
+}
+
+
+
+
+
