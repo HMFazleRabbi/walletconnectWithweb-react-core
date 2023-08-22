@@ -76,9 +76,9 @@ function Wallet() {
   // Function to connect using Metamask
   // No parameters
   // Return Value: None
-  const connectWallet = () => {
-    console.log("Metamask connect", active);
-    activate(injectedConnector);
+  const connectWallet = async () => {
+    await activate(injectedConnector);
+    // console.log("Metamask connect", active);
     setConnectorName("Metamask");
   };
 
@@ -86,8 +86,12 @@ function Wallet() {
   // No parameters
   // Return Value: None
   const disconnectWallet = async () => {
-    deactivate();
-    localStorage.removeItem("account");
+    try {
+      deactivate()
+      // console.log("Metamask deactivate", active);
+  } catch (ex) {
+      console.log(ex)
+      }
     setConnectorName(null);
   };
 
@@ -121,6 +125,9 @@ function Wallet() {
               {/* Footer */}
               <div className="footer">
                 {connectorName && <p>Connected using {connectorName}</p>}
+                <p className="ps-message">
+                  P.S. Metamask browser plugin retains user account information. Remember to clear browser history and log out from Metamask at the end of your session to ensure your privacy and security.
+                </p>
               </div>
             </div>
           ) : connectorName === "Wallet Connect" ? (
@@ -141,6 +148,7 @@ function Wallet() {
                 >
                   Disconnect
                 </button>
+
               </div>
               {/* Footer */}
               <div className="footer">
