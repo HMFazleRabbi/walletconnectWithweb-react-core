@@ -1,6 +1,4 @@
-Certainly! Here's a sample `README.md` file that you can use for your GitHub repository. Feel free to customize it according to your project's specifics:
 
-```markdown
 # Web3 Wallet Connector
 
 A simple React application that demonstrates how to connect to Ethereum wallets using the Web3 React library, Metamask, and Wallet Connect.
@@ -80,4 +78,4 @@ This project is licensed under the [MIT License](LICENSE).
 ---
 
 Feel free to reach out to [f.rabbiarcs@gmail.com](f.rabbiarcs@gmail.com) if you have any questions or feedback. Happy coding!
-```
+
