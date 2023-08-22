@@ -1,3 +1,4 @@
+// Import necessary libraries and components
 import React, { useState } from "react";
 import { Web3ReactProvider, useWeb3React } from "@web3-react/core";
 import { ethers } from "ethers";
@@ -5,81 +6,102 @@ import { WalletConnectConnector } from "@wagmi/core/connectors/walletConnect";
 import { InjectedConnector } from "@web3-react/injected-connector";
 import "./App.css";
 
+// Initialize the WalletConnectConnector
 const walletconnectConnector = new WalletConnectConnector({
-  options: { projectId: "47ace990d320fd976c47f6169a894dbf", showQrModal: true },
+  options: {
+    projectId: "47ace990d320fd976c47f6169a894dbf",
+    showQrModal: true,
+  },
 });
 
+// Initialize the InjectedConnector
 const injectedConnector = new InjectedConnector({
   supportedChainIds: [1, 3, 4, 5, 42], // Supported Ethereum network chain IDs
 });
 
+// Function to get the Web3Provider
+// Parameter: provider - Ethereum provider
+// Return Value: Web3Provider instance
 function getLibrary(provider) {
   return new ethers.providers.Web3Provider(provider);
 }
 
 function Wallet() {
+  // Get Ethereum-related information from the Web3React hook
   const {
     account,
     activate,
     active,
     chainId,
-    connector,
     deactivate,
-    error,
-    provider,
-    setError,
   } = useWeb3React();
 
+  // State to track the current connection
+  const [connectorName, setConnectorName] = useState(null);
+  const [wcAccount, setWcAccount] = useState(null);
+  const [wcChainId, setWcChainId] = useState(null);
+
+  // Function to connect using Wallet Connect
+  // No parameters
+  // Return Value: None
   const connectWalletConnectWallet = async () => {
     try {
       console.log("Wallet connect triggered");
       await walletconnectConnector.connect(chainId);
-      let accountWC = await walletconnectConnector.getAccount();
-      let chainIdWC = await walletconnectConnector.getChainId();
-      setconnectorName("Wallet Connect");
-      SetwcAccount(accountWC);
+      const accountWC = await walletconnectConnector.getAccount();
+      const chainIdWC = await walletconnectConnector.getChainId();
+      setConnectorName("Wallet Connect");
+      setWcAccount(accountWC);
       setWcChainId(chainIdWC);
     } catch (error) {
       console.error(error);
     }
   };
 
+  // Function to disconnect using Wallet Connect
+  // No parameters
+  // Return Value: None
   const disconnectWalletConnectWallet = async () => {
     try {
-      console.log("Wallet disconnectWalletConnectWallet triggered");
+      console.log("Wallet disconnect triggered");
       await walletconnectConnector.disconnect();
-      setconnectorName(null);
-      SetwcAccount(null);
+      setConnectorName(null);
+      setWcAccount(null);
       setWcChainId(null);
     } catch (error) {
       console.error(error);
     }
   };
 
+  // Function to connect using Metamask
+  // No parameters
+  // Return Value: None
   const connectWallet = () => {
-    console.log("Meta connect", active);
+    console.log("Metamask connect", active);
     activate(injectedConnector);
-    setconnectorName("Metamask");
+    setConnectorName("Metamask");
   };
 
+  // Function to disconnect from the current wallet
+  // No parameters
+  // Return Value: None
   const disconnectWallet = async () => {
     deactivate();
-    localstorage.removeitem("account");
-    setconnectorName(null);
+    localStorage.removeItem("account");
+    setConnectorName(null);
   };
-
-  const [connectorName, setconnectorName] = useState(null);
-  const [wcAccount, SetwcAccount] = useState(null);
-  const [wcChainId, setWcChainId] = useState(null);
 
   return (
     <div className="wallet-container">
       <div className="card">
+        {/* Title */}
         <h2 className="wallet-title">
           {connectorName ? `Connection Status` : "Connect Using"}
         </h2>
         <div className="card-content">
+          {/* Display content based on the current connection */}
           {connectorName === "Metamask" ? (
+            // Connected using Metamask
             <div className="wallet-connected">
               <div className="chain-id">
                 <span className="bold-text">Chain ID:</span> {chainId}
@@ -87,19 +109,22 @@ function Wallet() {
               <div className="connected-account">
                 <span className="bold-text">Connected Account:</span> {account}
               </div>
+              {/* Disconnect button */}
               <div className="disconnect-button-container">
                 <button
                   className="disconnect-button"
                   onClick={disconnectWallet}
                 >
-                  Disconnect
+                  Back
                 </button>
               </div>
+              {/* Footer */}
               <div className="footer">
                 {connectorName && <p>Connected using {connectorName}</p>}
               </div>
             </div>
           ) : connectorName === "Wallet Connect" ? (
+            // Connected using Wallet Connect
             <div className="wallet-connected">
               <div className="chain-id">
                 <span className="bold-text">Chain ID:</span> {wcChainId}
@@ -108,6 +133,7 @@ function Wallet() {
                 <span className="bold-text">Connected Account:</span>
                 <div> {wcAccount} </div>
               </div>
+              {/* Disconnect button */}
               <div className="disconnect-button-container">
                 <button
                   className="disconnect-button"
@@ -116,12 +142,15 @@ function Wallet() {
                   Disconnect
                 </button>
               </div>
+              {/* Footer */}
               <div className="footer">
                 {connectorName && <p>Connected using {connectorName}</p>}
               </div>
             </div>
           ) : (
+            // Not connected
             <div className="wallet-not-connected">
+              {/* Metamask button */}
               <button
                 className={`connect-button ${
                   !window.ethereum ? "disabled" : ""
@@ -131,6 +160,7 @@ function Wallet() {
               >
                 Metamask
               </button>
+              {/* Wallet Connect button */}
               <button
                 className="connect-wallet-button"
                 onClick={connectWalletConnectWallet}
