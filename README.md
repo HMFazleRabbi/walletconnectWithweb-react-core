@@ -101,6 +101,8 @@ If you encounter issues while using the Web3 Wallet Connector application, here 
 
 If you encounter any issues that are not covered here, feel free to reach out for help. You can open an issue in the repository or seek assistance from the project's maintainers. Remember that troubleshooting can involve a bit of trial and error, so don't hesitate to explore different solutions to find what works for you.
 
+### Watch the Tutorial Video
+For a demo of the Web3 Wallet Connector, watch our tutorial video on [YouTube: Wallet Connect Using web3 react core](https://youtu.be/2G53l4lm1iI)
 
 ## Contributions
 
